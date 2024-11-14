@@ -1,12 +1,13 @@
 #define ledsNum 3
-#define statesNum 4
+#define statesNum 5
 #define cas 1000
 int leds[3] = {4, 3, 2};
 bool states[statesNum][ledsNum] = {
   {1, 0, 0},
   {1, 1, 0},
   {0, 0, 1},
-  {0, 1, 0}
+  {0, 1, 0},
+  {1, 0, 0}
 };
 
 void semafor() {
