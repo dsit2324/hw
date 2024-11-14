@@ -1,0 +1,64 @@
+#define ledsNum 3
+#define statesNum 4
+#define cas 1000
+int leds[3] = {4, 3, 2};
+bool states[statesNum][ledsNum] = {
+  {1, 0, 0},
+  {1, 1, 0},
+  {0, 0, 1},
+  {0, 1, 0}
+};
+
+void semafor() {
+  for (int y = 0; y < statesNum; y++) {
+    for (int x = 0; x < ledsNum; x++) {
+      digitalWrite(leds[x], states[y][x]);
+    }
+    Serial.print("Stav semaforu: ");
+    Serial.println(y);
+    delay(cas);
+  }
+}
+
+void setup() {
+  Serial.begin(9600);
+  Serial.println("SEMAFOR");
+  for (int i = 0; i < ledsNum; i++) {
+    pinMode(leds[i], OUTPUT);
+  }
+}
+
+void allOff(){
+  for(int x = 0; x < ledsNum; x++){
+    digitalWrite(leds[x], LOW);
+  }
+}
+
+void jakaLedka (int hodnota) {
+  allOff();
+  switch (hodnota) {
+   case 1:
+    digitalWrite(leds[0], HIGH);
+    break;
+   case 2:
+    digitalWrite(leds[1], HIGH);
+    break;
+   case 3:
+    digitalWrite(leds[2], HIGH);
+    break;
+   case 4:
+    allOff();
+    break;
+  }
+}
+
+void loop() {
+  // semafor();
+  if(Serial.available()){
+    // int hodnota = Serial.read(); //vrací ascii kod znaku
+    // char hodnota = Serial.read(); //vrací znak
+    // String hodnota = Serial.readString(); //vrací retezec
+    int hodnota = Serial.parseInt();
+    jakaLedka(Serial.parseInt());
+  }
+}
