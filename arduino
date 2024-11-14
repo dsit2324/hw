@@ -53,12 +53,15 @@ void jakaLedka (int hodnota) {
 }
 
 void loop() {
+  digitalWrite(leds[0], HIGH);
   // semafor();
   if(Serial.available()){
+    Serial.read();
+    semafor();
     // int hodnota = Serial.read(); //vrací ascii kod znaku
     // char hodnota = Serial.read(); //vrací znak
     // String hodnota = Serial.readString(); //vrací retezec
-    int hodnota = Serial.parseInt();
-    jakaLedka(Serial.parseInt());
+    // int hodnota = Serial.parseInt();
+    // jakaLedka(Serial.parseInt());
   }
 }
